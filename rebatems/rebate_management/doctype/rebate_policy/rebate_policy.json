@@ -1,0 +1,319 @@
+{
+ "actions": [],
+ "allow_auto_repeat": 1,
+ "autoname": "naming_series:",
+ "creation": "2021-09-25 15:57:55.286783",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "rebate_name",
+  "description",
+  "status",
+  "column_break_4",
+  "company",
+  "cost_center",
+  "rebate_account",
+  "create_lcv",
+  "section_break_4",
+  "type",
+  "supplier",
+  "start_date",
+  "end_date",
+  "column_break_5",
+  "rebate_frequency",
+  "target_type",
+  "target_qty",
+  "rebate_per_qty",
+  "target_amount",
+  "rebate_percentage",
+  "supplier_currency",
+  "section_break_30",
+  "total_qty_achieved",
+  "total_amount_achieved",
+  "total_amount",
+  "column_break_32",
+  "percentage",
+  "section_break_10",
+  "items",
+  "section_break_20",
+  "credit_note_journal_entry",
+  "voucher",
+  "column_break_22",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Supplier",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "in_standard_filter": 1,
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "in_standard_filter": 1,
+   "label": "End Date",
+   "reqd": 1
+  },
+  {
+   "default": "Purchase",
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Type",
+   "options": "Purchase\nSales\nPromotional Sales",
+   "reqd": 1
+  },
+  {
+   "fieldname": "supplier_currency",
+   "fieldtype": "Link",
+   "label": "Supplier Currency",
+   "options": "Currency"
+  },
+  {
+   "depends_on": "eval:doc.target_type == \"Quantity\"",
+   "fieldname": "rebate_per_qty",
+   "fieldtype": "Currency",
+   "label": "Rebate Amount per Qty",
+   "mandatory_depends_on": "eval:doc.target_type == \"Quantity\"",
+   "options": ":supplier_currency"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Rebate Policy",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "RBTPOL-.YYYY.-.MM.-.######"
+  },
+  {
+   "fieldname": "rebate_name",
+   "fieldtype": "Data",
+   "label": "Rebate Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.target_type == \"Quantity\"",
+   "fieldname": "target_qty",
+   "fieldtype": "Float",
+   "label": "Target Qty",
+   "mandatory_depends_on": "eval:doc.target_type == \"Quantity\""
+  },
+  {
+   "depends_on": "company",
+   "fetch_from": "company.default_rebate_account",
+   "fetch_if_empty": 1,
+   "fieldname": "rebate_account",
+   "fieldtype": "Link",
+   "label": "Rebate Account",
+   "mandatory_depends_on": "company",
+   "options": "Account"
+  },
+  {
+   "allow_on_submit": 1,
+   "depends_on": "voucher",
+   "fieldname": "credit_note_journal_entry",
+   "fieldtype": "Link",
+   "label": "Credit Note Journal Entry",
+   "no_copy": 1,
+   "options": "Journal Entry"
+  },
+  {
+   "fieldname": "section_break_20",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "rebate_frequency",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Rebate Frequency",
+   "options": "Monthly\nQuarterly\nHalf Yearly\nYearly",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_22",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Rebate Policy Items",
+   "options": "Rebate Policy Item",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.target_type == \"Quantity\"",
+   "fieldname": "total_qty_achieved",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total QTY Achieved",
+   "no_copy": 1,
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_30",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_32",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "percentage",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "Achieved Percentage",
+   "no_copy": 1,
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "voucher",
+   "fieldtype": "Data",
+   "label": "Landed Cost Voucher",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fetch_from": "company.cost_center",
+   "fetch_if_empty": 1,
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center",
+   "reqd": 1
+  },
+  {
+   "default": "Setup",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Rebate Status",
+   "options": "Setup\nRunning\nAchieved\nCompleted\nMissed",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "Quantity",
+   "fieldname": "target_type",
+   "fieldtype": "Select",
+   "label": "Target Type",
+   "options": "Quantity\nAmount",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.target_type == \"Amount\"",
+   "fieldname": "target_amount",
+   "fieldtype": "Currency",
+   "label": "Target Amount",
+   "mandatory_depends_on": "eval:doc.target_type == \"Amount\""
+  },
+  {
+   "depends_on": "eval:doc.target_type == \"Amount\"",
+   "fieldname": "rebate_percentage",
+   "fieldtype": "Percent",
+   "label": "Rebate Percentage",
+   "mandatory_depends_on": "eval:doc.target_type == \"Amount\""
+  },
+  {
+   "depends_on": "eval:doc.target_type == \"Amount\"",
+   "fieldname": "total_amount_achieved",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Amount Achieved",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "default": "1",
+   "depends_on": "eval:doc.type == \"Purchase\"",
+   "description": "Create Landed Cost Voucher",
+   "fieldname": "create_lcv",
+   "fieldtype": "Check",
+   "label": "Create LCV"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2021-12-01 12:11:09.425507",
+ "modified_by": "Administrator",
+ "module": "Rebate Management",
+ "name": "Rebate Policy",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "rebate_name",
+ "track_changes": 1
+}
